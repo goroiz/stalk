@@ -1,0 +1,7 @@
+app = "stalk"
+
+[build]
+  builder = "paketobuildpacks/builder:base"
+
+[processes]
+  worker = "python main.py"
