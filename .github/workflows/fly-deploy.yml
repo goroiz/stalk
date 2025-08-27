@@ -1,0 +1,42 @@
+name: Deploy to Fly.io
+
+on:
+  push:
+    branches: [ "main" ]   # deploy otomatis tiap push ke branch main
+  workflow_dispatch:        # bisa dijalankan manual dari tab Actions
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup flyctl
+        uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Create app if not exists
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: |
+          flyctl apps create stalk --region sin || echo "app exists"
+
+      - name: Set Fly secrets
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          ROBLOX_USER_ID: ${{ secrets.ROBLOX_USER_ID }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          POLL_INTERVAL_SEC: ${{ secrets.POLL_INTERVAL_SEC }}
+        run: |
+          flyctl secrets set \
+            ROBLOX_USER_ID="${ROBLOX_USER_ID}" \
+            DISCORD_WEBHOOK_URL="${DISCORD_WEBHOOK_URL}" \
+            POLL_INTERVAL_SEC="${POLL_INTERVAL_SEC:-60}" \
+            --app stalk
+
+      - name: Deploy
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: |
+          flyctl deploy --remote-only --app stalk
