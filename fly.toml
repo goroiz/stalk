@@ -1,14 +1,9 @@
-app = "stalk"            # ganti kalau mau nama lain (unik di fly)
-primary_region = "sin"   # Singapore biar deket ID
+app = "stalk"            # ganti kalau app name di fly.io beda
+primary_region = "sin"   # Singapore (deket Indo)
 
 [build]
   builder = "paketobuildpacks/builder:base"
 
-# jalankan sebagai worker (bukan web)
+# kita jalankan sebagai WORKER (bukan web)
 [processes]
   worker = "python main.py"
-
-# matiin service HTTP (kita nggak expose port)
-[[vm]]
-  size = "shared-cpu-1x"
-  memory = 256
