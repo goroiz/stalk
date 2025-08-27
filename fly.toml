@@ -1,9 +1,0 @@
-app = "stalk"            # ganti kalau app name di fly.io beda
-primary_region = "sin"   # Singapore (deket Indo)
-
-[build]
-  builder = "paketobuildpacks/builder:base"
-
-# kita jalankan sebagai WORKER (bukan web)
-[processes]
-  worker = "python main.py"
