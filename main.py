@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 
 ROBLOX_USER_ID = os.getenv("7689970445")         # contoh: 12345678
 DISCORD_WEBHOOK_URL = os.getenv("https://discord.com/api/webhooks/1400959275009839114/pNsXtp-nr8nWtMy2Df4Rbs9Xc1GVgUZ6PpXRGor4PTgBm9R68FEU98C6mqxe-MRKFvTt")
-POLL_INTERVAL_SEC = int(os.getenv("POLL_INTERVAL_SEC", "60"))  # default 60s
+POLL_INTERVAL_SEC = int(os.getenv("60", "60"))  # default 60s
 
 SESSION = requests.Session()
 SESSION.headers.update({
