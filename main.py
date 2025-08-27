@@ -98,7 +98,7 @@ def build_description_embed(profile, old_desc, new_desc):
             {"name": "New", "value": new_desc if new_desc.strip() else "_(empty)_", "inline": False},
         ],
         "timestamp": datetime.now(timezone.utc).isoformat(),
-        "footer": {"text": "Roblox Status Watcher"},
+        "footer": {"text": "stop ganbi dont be crazy😭"},
         "color": 15105570
     }
     return embed
